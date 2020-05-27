@@ -1,28 +1,39 @@
 <?php
-include('creacion.php')
+$n = $_POST['nombre'];
+$l = $_POST['last'];
+$e = $_POST['edad'];
+$u = $_POST['user'];
+$c = $_POST['contra'];
+?>
+<html>
+<a href = "?Name=$n&Lastname=$l&Age=$e&User=$u&Password=$c">Crear</a>
 
-         if(isset($_GET['Name']))
+<?php
+    if(isset($_GET['Name']))
          {
             include ('uno.php');
             $con= new Conexion();
-            $nombre=$_GET['Name'];
-            $apellido=$_GET['Lastname'];
-            $edad=$_GET['Age'];
-            $usuario=$_GET['User'];
-            $co=$_GET['Password'];
-          
+            $na=$_GET['Name'];
+            $la=$_GET['Lastname'];
+              $a=$_GET['Age'];
+            $u=$_GET['User'];
+             $p=$_GET['Password'];
 
-            $query="INSERT INTO `USUARIOS`(`Name`, `Lastname`, `Age`, `User`, `Password`) VALUES (['$nombre','$apellido','$edad','$usuario','$co');";
-          
+            $query="INSERT INTO `usuarios`(`Name`, `Lastname`, `Age`, `User`, `Password`) VALUES ('$na', '$la', '$a', '$u', '$p');";
             $consulta=$con->query($query);
             $con->close();
-         
-         
+            ?>
+         <table align = "center">
+             <tr>
+             <td><p><strong><h1>CONTACTOS</h1></strong></p></td>
+             </tr>
+         <?php
+          
              $con= new Conexion();
-             $query="SELECT * FROM `USUARIOS` WHERE 1;";
+             $query="SELECT * FROM `usuarios` WHERE 1;";
              $pro=$con->query($query);
              $con->close();
-             $t=0;
+          
              while($row=mysqli_fetch_assoc($pro))
              {
                  echo "
@@ -34,24 +45,19 @@ include('creacion.php')
                      <td>
                         <p>".$row['Lastname']."</p>
                      </td>
-
-                        <td>
+                     <td>
                         <p>".$row['Age']."</p>
                      </td>
-
-                        <td>
+                     <td>
                         <p>".$row['User']."</p>
                      </td>
-
-                        <td>
+                     <td>
                         <p>".$row['Password']."</p>
                      </td>
                  </tr>
                  ";
-                 
-         }
+             
              }
-           
-          </table>
-
+             }
 ?>
+</html>
